@@ -1,0 +1,8 @@
+NFC_DriversLicenseReader
+========================
+
+AndroidNFC端末用の、運転免許証読み込みアプリです。
+アプリは、
+https://play.google.com/store/apps/details?id=jp.softstudio.DriversLicenseReader
+にて公開中。
+
