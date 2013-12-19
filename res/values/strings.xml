@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="hello">Hello World, DriversLicenseReaderActivity!</string>
+    <string name="app_name">運転免許証リーダー</string>
+
+    <string name="pin1_input">暗証番号１</string>
+    <string name="pin2_input">暗証番号２</string>
+    <string name="start_button">読み取り開始</string>
+    
+    <string name="tagwait">免許証をタッチしてください。</string>
+
+    <string name="pin_error">暗証番号が違います</string>
+    <string name="not_card_error">正しく読み込めませんでした。</string>
+    <string name="pin_lock">免許証がロックされてます。\n最寄りの警察署までご相談ください。</string>
+    
+    <string name="reading_message">読み込み中です。運転免許証を離さないでください。</string>
+
+    <string name="hint_pass">4桁</string>
+    <string name="warning_message">暗証番号を３回間違えると、以降読み出せなくなります。\nご注意ください。\n読み出せなくなった場合には、最寄りの警察署までご相談ください。</string>
+    <string name="licenses">顔写真のデコードにはjj2000(https://code.google.com/p/jj2000/)を使用しております。</string>
+    
+    
+</resources>
