@@ -601,219 +601,257 @@ public class DriversLicenseReader {
 		boolean bLoop = true;
 		int index=0;
 		int length=0;
+		int errpos=0;
+		try {
+			
 		do {
 			switch (data[index]) {
 			case 0x11:
+				errpos=data[index];
 				index++;
 				length=data[index++];
 				if (length==0) break;
 				break;
-			
 			case 0x12:	//名前
+				errpos=data[index];
 				index++;
 				length=data[index++];
 				if (length==0) break;
 				name = convertByteToJisString(data,index,length); 
 				break;
 			case 0x13:	//カナ
+				errpos=data[index];
 				index++;
 				length=data[index++];
 				if (length==0) break;
 				kana = convertByteToJisString(data,index,length); 
 				break;
 			case 0x14:	//通称名
+				errpos=data[index];
 				index++;
 				length=data[index++];
 				if (length==0) break;
 				tusyo = convertByteToJisString(data,index,length); 
 				break;
 			case 0x15:	//統一氏名
+				errpos=data[index];
 				index++;
 				length=data[index++];
 				if (length==0) break;
 				toitsu = convertByteToJisString(data,index,length); 
 				break;
 			case 0x16:	//生年月日
+				errpos=data[index];
 				index++;
 				length=data[index++];
 				if (length==0) break;
 				birth = convertByteToAsciiString(data,index,length); 
 				break;
 			case 0x17:	//住所
+				errpos=data[index];
 				index++;
 				length=data[index++];
 				if (length==0) break;
 				address = convertByteToJisString(data,index,length); 
 				break;
 			case 0x18:	//交付年月日
+				errpos=data[index];
 				index++;
 				length=data[index++];
 				if (length==0) break;
 				kofuday = convertByteToAsciiString(data,index,length); 
 				break;
 			case 0x19:	//照会番号
+				errpos=data[index];
 				index++;
 				length=data[index++];
 				if (length==0) break;
 				syoukai = convertByteToAsciiString(data,index,length); 
 				break;
 			case 0x1A:	//免許の色区分
+				errpos=data[index];
 				index++;
 				length=data[index++];
 				if (length==0) break;
 				kubun = convertByteToJisString(data,index,length); 
 				break;
 			case 0x1B:	//有効期間の末日
+				errpos=data[index];
 				index++;
 				length=data[index++];
 				if (length==0) break;
 				yukoday = convertByteToAsciiString(data,index,length); 
 				break;
 			case 0x1C:	//免許の条件1
+				errpos=data[index];
 				index++;
 				length=data[index++];
 				if (length==0) break;
 				joken1 = convertByteToJisString(data,index,length); 
 				break;
 			case 0x1D:	//免許の条件2
+				errpos=data[index];
 				index++;
 				length=data[index++];
 				if (length==0) break;
 				joken2 = convertByteToJisString(data,index,length); 
 				break;
 			case 0x1E:	//免許の条件3
+				errpos=data[index];
 				index++;
 				length=data[index++];
 				if (length==0) break;
 				joken3 = convertByteToJisString(data,index,length); 
 				break;
 			case 0x1F:	//免許の条件4
+				errpos=data[index];
 				index++;
 				length=data[index++];
 				if (length==0) break;
 				joken4 = convertByteToJisString(data,index,length); 
 				break;
 			case 0x20:	//公安委員会名
+				errpos=data[index];
 				index++;
 				length=data[index++];
 				if (length==0) break;
 				koanname = convertByteToJisString(data,index,length); 
 				break;
 			case 0x21:	//免許証の番号
+				errpos=data[index];
 				index++;
 				length=data[index++];
 				if (length==0) break;
 				menkyonumber = convertByteToAsciiString(data,index,length); 
 				break;
 			case 0x22:	//免許の年月日(二・小・原)
+				errpos=data[index];
 				index++;
 				length=data[index++];
 				if (length==0) break;
 				nisyogenday = convertByteToAsciiString(data,index,length); 
 				break;
 			case 0x23:	//免許の年月日(他)
+				errpos=data[index];
 				index++;
 				length=data[index++];
 				if (length==0) break;
 				hokaday = convertByteToAsciiString(data,index,length); 
 				break;
 			case 0x24:	//免許の年月日(二種)
+				errpos=data[index];
 				index++;
 				length=data[index++];
 				if (length==0) break;
 				nisyuday = convertByteToAsciiString(data,index,length); 
 				break;
 			case 0x25:	//免許の年月日(大型)
+				errpos=data[index];
 				index++;
 				length=data[index++];
 				if (length==0) break;
 				ogataday = convertByteToAsciiString(data,index,length); 
 				break;
 			case 0x26:	//免許の年月日(普通)
+				errpos=data[index];
 				index++;
 				length=data[index++];
 				if (length==0) break;
 				futuday = convertByteToAsciiString(data,index,length); 
 				break;
 			case 0x27:	//免許の年月日(大特)
+				errpos=data[index];
 				index++;
 				length=data[index++];
 				if (length==0) break;
 				daitokuday = convertByteToAsciiString(data,index,length); 
 				break;
 			case 0x28:	//免許の年月日(大自二)
+				errpos=data[index];
 				index++;
 				length=data[index++];
 				if (length==0) break;
 				daijiniday = convertByteToAsciiString(data,index,length); 
 				break;
 			case 0x29:	//免許の年月日(普自二)
+				errpos=data[index];
 				index++;
 				length=data[index++];
 				if (length==0) break;
 				futujiniday = convertByteToAsciiString(data,index,length); 
 				break;
 			case 0x2A:	//免許の年月日(小特)
+				errpos=data[index];
 				index++;
 				length=data[index++];
 				if (length==0) break;
 				kotokuday = convertByteToAsciiString(data,index,length); 
 				break;
 			case 0x2B:	//免許の年月日(原付)
+				errpos=data[index];
 				index++;
 				length=data[index++];
 				if (length==0) break;
 				gentukiday = convertByteToAsciiString(data,index,length); 
 				break;
 			case 0x2C:	//免許の年月日(け引)
+				errpos=data[index];
 				index++;
 				length=data[index++];
 				if (length==0) break;
 				keninday = convertByteToAsciiString(data,index,length); 
 				break;
 			case 0x2D:	//免許の年月日(大二)
+				errpos=data[index];
 				index++;
 				length=data[index++];
 				if (length==0) break;
 				daijiday = convertByteToAsciiString(data,index,length); 
 				break;
 			case 0x2E:	//免許の年月日(普二)
+				errpos=data[index];
 				index++;
 				length=data[index++];
 				if (length==0) break;
 				fujiday = convertByteToAsciiString(data,index,length); 
 				break;
 			case 0x2F:	//免許の年月日(大特二)
+				errpos=data[index];
 				index++;
 				length=data[index++];
 				if (length==0) break;
 				daitokuji = convertByteToAsciiString(data,index,length); 
 				break;
 			case 0x30:	//免許の年月日(け引二)
+				errpos=data[index];
 				index++;
 				length=data[index++];
 				if (length==0) break;
 				keninniday = convertByteToAsciiString(data,index,length); 
 				break;
 			case 0x31:	// 免許の年月日(中型)
+				errpos=data[index];
 				index++;
 				length=data[index++];
 				if (length==0) break;
 				chuday = convertByteToAsciiString(data,index,length); 
 				break;
 			case 0x32:	// 免許の年月日(中二)
+				errpos=data[index];
 				index++;
 				length=data[index++];
 				if (length==0) break;
 				chuniday = convertByteToAsciiString(data,index,length); 
 				break;
 			case 0x41:	//本籍
+				errpos=data[index];
 				index++;
 				length=data[index++];
 				if (length==0) break;
 				honseki = convertByteToJisString(data,index,length); 
 				break;
 			case 0x48:	//外字１
+				errpos=data[index];
 				index++;
 				length=data[index++];
 				if (length==0) {
@@ -824,6 +862,7 @@ public class DriversLicenseReader {
 				Gaiji1 = Arrays.copyOfRange(data,index,index+length);
 				break;
 			case 0x49:	//外字１
+				errpos=data[index];
 				index++;
 				length=data[index++];
 				if (length==0) {
@@ -834,6 +873,7 @@ public class DriversLicenseReader {
 				Gaiji2 = Arrays.copyOfRange(data,index,index+length);
 				break;
 			case 0x50:	//追記の有無
+				errpos=data[index];
 				index++;
 				length=data[index++];
 				if (length==0) break;
@@ -850,6 +890,10 @@ public class DriversLicenseReader {
 			
 		} while(bLoop);
 		
+		} catch (Exception e) {
+		      e.printStackTrace();
+		      
+	    }
 	}
 	private String convertByteToAsciiString(byte[] data,int index, int length) {
 		String result ="";

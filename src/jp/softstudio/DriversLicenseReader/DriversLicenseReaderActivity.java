@@ -51,7 +51,15 @@ public class DriversLicenseReaderActivity extends Activity {
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);  	//スリープしない
 
         setContentView(R.layout.main);
-
+ /*
+        //アプリケーションで共通に利用するオブジェクトには、メモリリークが発生しないようにthisではなく  
+        //Context.getApplicationContext()を使用します。  
+        Context context = this.getApplicationContext();   
+        //キャッチされない例外により、スレッドが突然終了したときや、  
+        //このスレッドに対してほかにハンドラが定義されていないときに  
+        //呼び出されるデフォルトのハンドラを設定します。  
+        Thread.setDefaultUncaughtExceptionHandler(new CsUncaughtExceptionHandler(context));  
+*/
         CheckBox cb=(CheckBox)findViewById(R.id.checkBox1);
         cb.setChecked(true);
         cb.setEnabled(false);
@@ -64,9 +72,29 @@ public class DriversLicenseReaderActivity extends Activity {
 				// TODO Auto-generated method stub
 				EditText edittext1 = (EditText)findViewById(R.id.editText1);
                 EditText edittext2 = (EditText)findViewById(R.id.editText2);
+                CheckBox cb1=(CheckBox)findViewById(R.id.checkBox1);
+                CheckBox cb2=(CheckBox)findViewById(R.id.checkBox2);
                 s1 = edittext1.getText().toString();
                 s2 = edittext2.getText().toString();
-/*                if ((s2.length()==0)) {
+                if (((s1.length()==0) && (cb1.isChecked())) && ((s2.length()==0) && (cb2.isChecked()))) {
+                	// 両方有効でかつ未設定
+                	showDialogConf1("暗証番号１・２が未入力です。\n読み込みを続けますか？");
+                	return;
+                } else if (((s1.length()==0) && (cb1.isChecked())) || ((s2.length()==0) && (cb2.isChecked()))) {
+                	// どちらかが有効でかつ未設定
+                	if ((s1.length()==0) && (cb1.isChecked())) {
+                		//暗証番号１が未設定
+                    	showDialogConf1("暗証番号１が未入力です。\n読み込みを続けますか？");
+                    	return;
+                	}
+                	if ((s2.length()==0) && (cb2.isChecked())) {
+                		//暗証番号２が未設定
+                    	showDialogConf1("暗証番号２が未入力です。\n読み込みを続けますか？");
+                    	return;
+                	}
+                }
+                
+                /*                if ((s2.length()==0)) {
                 	showDialogYESNO("暗証番号２が未入力です。\n読み込みを続けますか？");
                 	return;
                 }*/
@@ -76,8 +104,6 @@ public class DriversLicenseReaderActivity extends Activity {
         	
         });
         
-    
-    
     }
     
     private void startReader()
@@ -117,7 +143,7 @@ public class DriversLicenseReaderActivity extends Activity {
     }
     
     
-    private void showDialogYESNO(String msg)
+    private void showDialogConf1(String msg)
     {
     	AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
         alertDialogBuilder.setMessage(msg);
@@ -126,7 +152,18 @@ public class DriversLicenseReaderActivity extends Activity {
                 new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        startReader();
+                    	//暗証番号空白を"****"にする
+                        CheckBox cb1=(CheckBox)findViewById(R.id.checkBox1);
+                        CheckBox cb2=(CheckBox)findViewById(R.id.checkBox2);
+                    	if ((s1.length()==0) && (cb1.isChecked())) {
+                    		//暗証番号１が未設定
+                    		s1="****";
+                    	}
+                    	if ((s2.length()==0) && (cb2.isChecked())) {
+                    		//暗証番号２が未設定
+                    		s2="****";
+                    	}
+                    	startReader();
                     }
                 });
         // アラートダイアログの否定ボタンがクリックされた時に呼び出されるコールバックリスナーを登録します
@@ -140,5 +177,10 @@ public class DriversLicenseReaderActivity extends Activity {
         alertDialog.show();    	
     }
     
-    
+
+    @Override  
+    protected void onStart() {  
+        super.onStart();  
+//        CsUncaughtExceptionHandler.SendBugReport(this);  
+    } 
 }
